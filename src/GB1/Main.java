@@ -2,68 +2,130 @@ package GB1;
 
 public class Main {
 
-    
-//1
     public static void main(String[] args) {
 
-//2
-    byte b1 = 1;
-    short s1 = 1;
-    int i1 = 1;
-    long l1 = 1L;
+// 1.
+        numWork(1);
 
-    float f1 = 1.1f;
-    double d1 = 1.1;
+        int [] mas = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0};
+        for (int i = 0; i < mas.length; i++) mas [i]=(mas[i]==0)?1:0;
 
-    char c1 = 'a';
+        for (int r: mas) System.out.print(r + " ");
 
-    boolean bo1 = true;
+        line();
 
-    String str = "String";
+// 2.
+        numWork(2);
+        int [] masTwo = new int [8];
+        for (int i = 0; i < masTwo.length; i++) masTwo[i]=i*3;
 
-//3
-    System.out.println(metOne (1, 1, 1, 1));
+        for (int t : masTwo) System.out.print(t + " ");
+        line();
+// 3.
+        numWork(3);
+        int [] masThree = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
+        for (int i = 0; i <masThree.length ; i++) if (masThree[i]<6)masThree[i]*=2;
 
-//4
-    System.out.println(metTwo(5,15));
+        for (int t : masThree) System.out.print(t + " ");
 
-//5
-    metThree(-1);
+        line();
 
-//6
-    System.out.println(metFour(-6));
+// 4.
+        numWork(4);
+        int k = 10;
+        int [][] masFour= new int [k][k];
 
-//7
-    metFive("Пётр");
+        for (int i = 0; i < masFour.length; i++) {
+             System.out.println();
+            for (int j = 0; j < masFour[i].length; j++) {
+                masFour[i][j] = (i==j||masFour.length-i-1==j)?1:0;
+                   System.out.print(masFour[i][j] + " ");
+            }
+        }
 
-//8
-    metSix(2020);
+        line();
+// 5.
+        numWork(5);
+        int [] masFive = {5, 1, 5, 7, 1, 7, 0, 0};
+
+        int max= masFive[0];
+        int min= masFive[0];
+
+        for (int j : masFive) {
+            if (max <= j) max = j;
+            if (min >= j) min = j;
+        }
+
+        System.out.print ("Максимальный элемент имеет значение: "+ max + ", в массиве под номерами: ");
+        for (int i = 0; i <masFive.length ; i++) if (masFive[i] == max) System.out.print(i + " ");
+        System.out.println();
+        System.out.print ("Минимальный элемент имеет значение: "+ min + ", в массиве под номерами: ");
+        for (int i = 0; i <masFive.length ; i++) if (masFive[i] == min) System.out.print(i + " ");
+
+        line();
+
+// 6.
+        numWork(6);
+        int [] masSix = {4, 5, 9};
+
+        System.out.println(metSix(masSix));
+        line();
+// 7.
+        numWork(7);
+        int [] masSeven = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int step = -1;
+
+        System.out.println("Массив до: ");
+        for (int t : masSeven) System.out.print(t);
+        System.out.println();
+        System.out.println("Смещение на " + step);
+
+        metSeven(masSeven, step);
+        for (int t : masSeven) System.out.print(t);
+
+        line();
+
     }
 
-    public static int metOne (int a, int b, int c, int d){
-        return a * (b + (c / d));
+
+    public static int [] metSeven (int [] ar, int b) {
+
+        if (b<0)b=ar.length - b;
+
+        while (b>0) {
+            int buffer = ar[0];
+            for (int i = 0; i < ar.length - 1; i++) {
+                int n = (i < ar.length - 1) ? i + 1 : 0;
+                ar[i] = ar[n];
+                ar[n] = buffer;
+            }
+            b--;
+        }
+        return ar;
     }
 
-    public static boolean metTwo (int a, int b){
-        return a + b >= 10 && a + b <= 20;
+
+    public static boolean metSix (int[] mas) {
+
+        int sumL = 0;
+        int sumR = 0;
+        for (int t : mas) sumR += t;
+        for (int ma : mas) {
+            sumL = sumL + ma;
+            if (sumL == sumR - sumL) return true;
+        }
+        return false;
     }
 
-    public static void metThree (int a){
-        if (a>=0) System.out.println("Положительное число");
-        else System.out.println("Отрицательное число");
+    public static void numWork(int q){
+        System.out.println("Задание № " + q);
     }
 
-    public static boolean metFour (int a){
-        return a<0;
-    }
-
-    public static void metFive (String a){
-        System.out.println("Привет, "+ a +"!");
-    }
-
-    public static void metSix (int a){
-        String b = " не ";
-        if (a%4==0 && a%100!=0 || a%400==0) b = " ";
-        System.out.println(a + " год" + b + "високосный!");
+    public static void line(){
+        System.out.println();
+        System.out.println("--------------------------------------------------------------------------");
     }
 }
+
+
+
