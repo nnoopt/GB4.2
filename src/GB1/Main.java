@@ -123,7 +123,7 @@ public class Main {
 
     public static void line(){
         System.out.println();
-        System.out.println("--------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------");
     }
 }
 
