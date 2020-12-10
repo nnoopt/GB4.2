@@ -1,131 +1,103 @@
 package GB1;
 
+import java.util.Random;
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
 
-// 1.
-        numWork(1);
+            String[] words = {"apple", "orange", "lemon", "banana", "apricot", "avocado", "broccoli", "carrot", "cherry", "garlic", "grape", "melon", "leak", "kiwi", "mango", "mushroom", "nut", "olive", "pea", "peanut", "pear", "pepper", "pineapple", "pumpkin", "potato"};
+            String s = " Предложение один     Теперь предложение  два    Тут предложение   три";
 
-        int [] mas = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0};
-        for (int i = 0; i < mas.length; i++) mas [i]=(mas[i]==0)?1:0;
+            one(3, 10);
+            two(words);
+            three (s);
+    }
 
-        for (int r: mas) System.out.print(r + " ");
 
-        line();
+    public static void one(int attempts, int variants) {
 
-// 2.
-        numWork(2);
-        int [] masTwo = new int [8];
-        for (int i = 0; i < masTwo.length; i++) masTwo[i]=i*3;
+        System.out.println("Задание 1");
 
-        for (int t : masTwo) System.out.print(t + " ");
-        line();
-// 3.
-        numWork(3);
-        int [] masThree = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
-        for (int i = 0; i <masThree.length ; i++) if (masThree[i]<6)masThree[i]*=2;
+        while (true) {
 
-        for (int t : masThree) System.out.print(t + " ");
+        System.out.println("Угадай число от 0 до " + (variants-1) + "!");
+            Random random = new Random();
+            Scanner sc = new Scanner(System.in);
+            int r = random.nextInt(10);
 
-        line();
+            for (int i = attempts; i > 0; i--) {
 
-// 4.
-        numWork(4);
-        int k = 10;
-        int [][] masFour= new int [k][k];
+                System.out.println("У тебя осталось попыток: " + i);
+                System.out.println("Введи число ...");
 
-        for (int i = 0; i < masFour.length; i++) {
-             System.out.println();
-            for (int j = 0; j < masFour[i].length; j++) {
-                masFour[i][j] = (i==j||masFour.length-i-1==j)?1:0;
-                   System.out.print(masFour[i][j] + " ");
+                int s = sc.nextInt();
+
+                if (s == r) {
+                    System.out.println("Ура, ты угодал!");
+                    break;
+                } else {
+                    System.out.println("Ты не угодал");
+                    if (s > r) System.out.println("Твое число сшишком большое ..");
+                    else System.out.println("Твое число сшишком маленькое .. ");
+                }
+            }
+            int res;
+
+            while (true) {
+                System.out.println("Повторить игру? 1 - если НЕТ, 0 - если ДА");
+                res = sc.nextInt();
+                if (res == 1) break;
+                if (res == 0) break;
+            }
+
+            if (res == 1) {
+                System.out.println("Конец игры!");
+                System.out.println("===================================");
+                break;
+            }
+
+        }
+    }
+
+
+    public static void two (String [] words){
+        Random random = new Random();
+        String wordComputer = words[random.nextInt(words.length)];
+        System.out.println("Угадай слово!");
+        Scanner scn = new Scanner(System.in);
+        StringBuilder stringBuilder = new StringBuilder("###############");
+        while (true) {
+
+            String wordPeople = scn.nextLine();
+
+            for (int i = 0; i < wordComputer.length() && i<wordPeople.length(); i++) {
+                if (wordComputer.charAt(i) == wordPeople.charAt(i)) stringBuilder.setCharAt(i, wordComputer.charAt(i));
+            }
+            System.out.println(stringBuilder);
+            if (wordPeople.equalsIgnoreCase(wordComputer)) break;
+        }
+        System.out.println("Ура, ты угадал слово!");
+        System.out.println("===================================");
+    }
+
+    public static void three (String s){
+        System.out.println(s);
+        String s1 = s.replaceAll(" +", " ");
+
+        StringBuilder s2 = new StringBuilder(s1);
+
+        for (int  i = s1.length()-1; i>= 0 ; i--) {
+            if (s1.charAt(i)>= 'А' && s1.charAt(i)<= 'Я'){
+                s2.setCharAt(i-1, '.');
+                s2.insert(i, ' ');
             }
         }
 
-        line();
-// 5.
-        numWork(5);
-        int [] masFive = {5, 1, 5, 7, 1, 7, 0, 0};
-
-        int max= masFive[0];
-        int min= masFive[0];
-
-        for (int j : masFive) {
-            if (max <= j) max = j;
-            if (min >= j) min = j;
-        }
-
-        System.out.print ("Максимальный элемент имеет значение: "+ max + ", в массиве под номерами: ");
-        for (int i = 0; i <masFive.length ; i++) if (masFive[i] == max) System.out.print(i + " ");
-        System.out.println();
-        System.out.print ("Минимальный элемент имеет значение: "+ min + ", в массиве под номерами: ");
-        for (int i = 0; i <masFive.length ; i++) if (masFive[i] == min) System.out.print(i + " ");
-
-        line();
-
-// 6.
-        numWork(6);
-        int [] masSix = {4, 5, 9};
-
-        System.out.println(metSix(masSix));
-        line();
-// 7.
-        numWork(7);
-        int [] masSeven = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        int step = -1;
-
-        System.out.println("Массив до: ");
-        for (int t : masSeven) System.out.print(t);
-        System.out.println();
-        System.out.println("Смещение на " + step);
-
-        metSeven(masSeven, step);
-        for (int t : masSeven) System.out.print(t);
-
-        line();
-
-    }
-
-
-    public static int [] metSeven (int [] ar, int b) {
-
-        if (b<0)b=ar.length - b;
-
-        while (b>0) {
-            int buffer = ar[0];
-            for (int i = 0; i < ar.length - 1; i++) {
-                int n = (i < ar.length - 1) ? i + 1 : 0;
-                ar[i] = ar[n];
-                ar[n] = buffer;
-            }
-            b--;
-        }
-        return ar;
-    }
-
-
-    public static boolean metSix (int[] mas) {
-
-        int sumL = 0;
-        int sumR = 0;
-        for (int t : mas) sumR += t;
-        for (int ma : mas) {
-            sumL = sumL + ma;
-            if (sumL == sumR - sumL) return true;
-        }
-        return false;
-    }
-
-    public static void numWork(int q){
-        System.out.println("Задание № " + q);
-    }
-
-    public static void line(){
-        System.out.println();
-        System.out.println("-------------------------------------------------------------------------");
+        s2.delete(0, 2);
+        if (s2.charAt(s2.length()-1)!='.') s2.append('.');
+        System.out.println(s2);
+        System.out.println("===================================");
     }
 }
-
-
-
